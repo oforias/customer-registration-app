@@ -1,0 +1,39 @@
+# Database credentials (if you have a separate config file)
+config/database.php
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Node modules (if you add any frontend build tools)
+node_modules/
+
+# Composer (if you add PHP dependencies)
+vendor/
+
+# Backup files
+*.bak
+*.backup
