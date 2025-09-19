@@ -70,5 +70,35 @@ class CustomerController {
 
         return ['status' => 'success'];
     }
+
+    public function login_customer_ctr($data) {
+        // Validate input data
+        $validation = $this->validate_login_data($data);
+        if ($validation['status'] === 'error') {
+            return $validation;
+        }
+
+        // Call the login method from the customer class
+        return $this->customer->login($data['email'], $data['password']);
+    }
+
+    private function validate_login_data($data) {
+        // Check required fields
+        if (empty($data['email']) || empty($data['password'])) {
+            return ['status' => 'error', 'message' => 'Email and password are required.'];
+        }
+
+        // Validate email format
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return ['status' => 'error', 'message' => 'Invalid email format.'];
+        }
+
+        // Validate email length
+        if (strlen($data['email']) > 50) {
+            return ['status' => 'error', 'message' => 'Email must be less than 50 characters.'];
+        }
+
+        return ['status' => 'success'];
+    }
 }
 ?>

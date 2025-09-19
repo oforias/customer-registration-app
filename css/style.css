@@ -182,3 +182,41 @@ p a {
 p a:hover {
     text-decoration: underline;
 }
+
+.welcome-message {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    text-align: center;
+}
+
+.welcome-message h2 {
+    color: #45a049;
+    margin-bottom: 15px;
+}
+
+.user-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.user-info p {
+    margin: 10px 0;
+    color: #333;
+}
+
+.user-info strong {
+    color: #35424a;
+}
+
+nav ul li span {
+    color: #45a049;
+    font-weight: bold;
+    padding: 10px 15px;
+    display: inline-block;
+}

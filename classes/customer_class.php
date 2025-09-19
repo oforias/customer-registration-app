@@ -73,5 +73,51 @@ class Customer extends DatabaseConnection {
             return false;
         }
     }
+
+    public function getCustomerByEmail($email) {
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM customer WHERE customer_email = ?");
+            $stmt->execute([$email]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function verifyPassword($password, $hashedPassword) {
+        return password_verify($password, $hashedPassword);
+    }
+
+    public function login($email, $password) {
+        try {
+            // Get customer by email
+            $customer = $this->getCustomerByEmail($email);
+            
+            if (!$customer) {
+                return ['status' => 'error', 'message' => 'Invalid email or password.'];
+            }
+
+            // Verify password
+            if (!$this->verifyPassword($password, $customer['customer_pass'])) {
+                return ['status' => 'error', 'message' => 'Invalid email or password.'];
+            }
+
+            // Return customer data for session
+            return [
+                'status' => 'success', 
+                'message' => 'Login successful.',
+                'customer' => [
+                    'id' => $customer['customer_id'],
+                    'name' => $customer['customer_name'],
+                    'email' => $customer['customer_email'],
+                    'role' => $customer['user_role'],
+                    'country' => $customer['customer_country'],
+                    'city' => $customer['customer_city']
+                ]
+            ];
+        } catch (PDOException $e) {
+            return ['status' => 'error', 'message' => 'Database error: ' . $e->getMessage()];
+        }
+    }
 }
 ?>
